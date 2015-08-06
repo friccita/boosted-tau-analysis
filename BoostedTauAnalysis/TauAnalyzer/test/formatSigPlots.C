@@ -831,7 +831,7 @@ void formatSigPlots(const string& inputVersion, const string& outputVersion,
   cout << "---\nMaking final plots\n";
 
   //make the final plot showing all background methods, signals, data, and errors
-  string resBkgOutputFile(analysisFilePath + "results/resBkg" + MTBin + tag19p7InvFb + 
+  string resBkgOutputFile(analysisFilePath + "results/resBkg"/*"results/resBkg_noRebin"*/ + MTBin + tag19p7InvFb + 
 			  narrowBinsVTag + fileExt);
   string dataVsMCOutputFile(analysisFilePath + "results/dataVsMC_muHadNonIsoAnalysis" + MTBin + 
 			    tag19p7InvFb + outputVTag + fileExt);

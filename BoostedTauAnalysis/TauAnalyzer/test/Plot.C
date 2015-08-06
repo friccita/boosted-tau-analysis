@@ -925,7 +925,12 @@ TH1F* makeDataBkgAgreementHist(const TH1F* data, const TH1F* nomBkg, const TH1F*
     allQCDBkgSystErr2*=allQCDBkgSystErr2;
     Double_t allEWBkgSystErr2 = allEWBkg->GetBinContent(iBin) - nomBkgVal;
     allEWBkgSystErr2*=allEWBkgSystErr2;
-    Double_t totBkgErr = sqrt(nomBkgStatErr*nomBkgStatErr + allQCDBkgSystErr2 + allEWBkgSystErr2);
+    //Double_t totBkgErr = sqrt(nomBkgStatErr*nomBkgStatErr + allQCDBkgSystErr2 + allEWBkgSystErr2);
+    Double_t totBkgErr = 0.;
+    if (allQCDBkgSystErr2 > allEWBkgSystErr2)
+      totBkgErr = sqrt(nomBkgStatErr*nomBkgStatErr + allQCDBkgSystErr2);
+    else
+      totBkgErr = sqrt(nomBkgStatErr*nomBkgStatErr + allEWBkgSystErr2);
     Double_t binContent = totBkgErr == 0.0 ? 0.0 : (ratioHist->GetBinContent(iBin)/totBkgErr);
     ratioHist->SetBinContent(iBin, binContent);
     ratioHist->SetBinError(iBin, dataNomBkgStatErr/nomBkgStatErr); //meaningless
@@ -3354,12 +3359,12 @@ void addFinalPlot2(pair<TFile*, float>& isoSigBkgFile, TFile& isoDataFile,
     resonance backgrounds, but they are far outweighed by the statistical errors so the 
     correlation is ignored*/
   cout << "Nominal -- ";
-  makeAndFormatPullHistogram(isoData, resBkg, nonIsoData, kAzure, "HIST");
-//   makeAndFormatPullHistogram(isoData, resBkg, nonIsoData, nonIsoWNonIsoData, nonIsoMCHist, kAzure, 
-// 			     "HIST");
+  //makeAndFormatPullHistogram(isoData, resBkg, nonIsoData, kAzure, "HIST");
+  makeAndFormatPullHistogram(isoData, resBkg, nonIsoData, nonIsoWNonIsoData, nonIsoMCHist, kAzure, 
+ 			     "HIST");
 
   //high-MT bin only
-  if (resBkgRegCkFixed != NULL) {
+  /*  if (resBkgRegCkFixed != NULL) {
 
     //pull(reg. C sideband, reg. B MC)
     cout << "J/psi bkg. shape from reg. C, jet fake bkg. shape from reg. B MC -- ";
@@ -3375,7 +3380,7 @@ void addFinalPlot2(pair<TFile*, float>& isoSigBkgFile, TFile& isoDataFile,
     cout << "J/psi bkg. shape from reg. C, jet fake bkg. shape from reg. D MC -- ";
     makeAndFormatPullHistogram(isoData, resBkgRegCkFixed, nonIsoWNonIsoData, kAzure - 3, 
 			       "HISTSAME");
-  }
+			       }
 
   //pull(nom, reg. B MC)
   cout << "Nominal J/psi bkg. shape, jet fake bkg. shape from reg. B MC -- ";
@@ -3403,6 +3408,7 @@ void addFinalPlot2(pair<TFile*, float>& isoSigBkgFile, TFile& isoDataFile,
     makeAndFormatPullHistogram(isoData, resBkgRegDkFixed, nonIsoWNonIsoData, kAzure - 8, 
 			       "HISTSAME");
   }
+  */
 
   //write the canvas to file
   outCanvas.Write();

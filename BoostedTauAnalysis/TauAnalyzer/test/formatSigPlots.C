@@ -44,6 +44,7 @@ void formatSigPlots(const string& inputVersion, const string& outputVersion,
   canvasNames1D.push_back("muHadMass1Prong1Pi0Canvas");
   canvasNames1D.push_back("muHadMass1Prong2Pi0Canvas");
   canvasNames1D.push_back("muHadMass3ProngCanvas");
+  canvasNames1D.push_back("muHadMass3MuShareTrackCanvas");
   canvasNames1D.push_back("muHadMassReweightErrSqCanvas");
   canvasNames1D.push_back("muHadChargeCanvas");
   canvasNames1D.push_back("muHadDdxyCanvas");
@@ -191,6 +192,7 @@ void formatSigPlots(const string& inputVersion, const string& outputVersion,
   graphNames1D.push_back("muHadMass1Prong1Pi0");
   graphNames1D.push_back("muHadMass1Prong2Pi0");
   graphNames1D.push_back("muHadMass3Prong");
+  graphNames1D.push_back("muHadMass3MuShareTrack");
   graphNames1D.push_back("muHadMassReweightErrSq");
   graphNames1D.push_back("muHadCharge");
   graphNames1D.push_back("muHadDdxy");

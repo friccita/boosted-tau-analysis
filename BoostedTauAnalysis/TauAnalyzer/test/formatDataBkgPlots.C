@@ -43,6 +43,7 @@ void formatDataBkgPlots(const string& inputVersion, const string& outputVersion,
   canvasNames1D.push_back("muHadMass1Prong1Pi0Canvas");
   canvasNames1D.push_back("muHadMass1Prong2Pi0Canvas");
   canvasNames1D.push_back("muHadMass3ProngCanvas");
+  canvasNames1D.push_back("muHadMass3MuShareTrackCanvas");
   canvasNames1D.push_back("muHadMassReweightErrSqCanvas");
   canvasNames1D.push_back("muHadChargeCanvas");
   canvasNames1D.push_back("muHadDdxyCanvas");
@@ -190,6 +191,7 @@ void formatDataBkgPlots(const string& inputVersion, const string& outputVersion,
   graphNames1D.push_back("muHadMass1Prong1Pi0");
   graphNames1D.push_back("muHadMass1Prong2Pi0");
   graphNames1D.push_back("muHadMass3Prong");
+  graphNames1D.push_back("muHadMass3MuShareTrack");
   graphNames1D.push_back("muHadMassReweightErrSq");
   graphNames1D.push_back("muHadCharge");
   graphNames1D.push_back("muHadDdxy");
@@ -1160,7 +1162,7 @@ void formatDataBkgPlots(const string& inputVersion, const string& outputVersion,
 
   //compare region B data - MC to region D data
   vector<string> compRegBDataMinusMCToRegDDataInputFiles;
-  compRegBDataMinusMCToRegDDataInputFiles.push_back(outputFileNameB);
+  compRegBDataMinusMCToRegDDataInputFiles.push_back(nonIsoWDataNonIsoHaddOutputFile);
   compRegBDataMinusMCToRegDDataInputFiles.push_back(dataVsMCOutputDiff);
   string compRegBDataMinusMCToRegDDataOutputFile(analysisFilePath + 
 						 "results/regBDataMinusMCVsRegDData" + MTBin + 
@@ -1168,10 +1170,13 @@ void formatDataBkgPlots(const string& inputVersion, const string& outputVersion,
   QCDVsMCClosurePlots(compRegBDataMinusMCToRegDDataInputFiles, variable, theunit, 
 		      pair<string, string>("Region D data", "Region B data - MC"), 1, 3, 0.0, 
 		      11.0, compRegBDataMinusMCToRegDDataOutputFile, "RECREATE");
+  QCDVsMCClosurePlots(compRegBDataMinusMCToRegDDataInputFiles, "muHadMass3MuShareTrack", theunit, 
+		      pair<string, string>("Region D data", "Region B data - MC"), 1, 3, 0.0, 
+		      11.0, compRegBDataMinusMCToRegDDataOutputFile, "UPDATE");
 
   //compare region C data to region D data
   vector<string> compRegCDataToRegDDataInputFiles;
-  compRegCDataToRegDDataInputFiles.push_back(outputFileNameB);
+  compRegCDataToRegDDataInputFiles.push_back(nonIsoWDataNonIsoHaddOutputFile);
   compRegCDataToRegDDataInputFiles.push_back(inputFileNameB);
   string compRegCDataToRegDDataOutputFile(analysisFilePath + "results/regCDataVsRegDData" + 
 					  MTBin + tag19p7InvFb + outputVTag + fileExt);
@@ -1188,6 +1193,9 @@ void formatDataBkgPlots(const string& inputVersion, const string& outputVersion,
 		      pair<string, string>("Region D data", "Region C data"), 1, 3, 0.0, 11.0, 
 		      compRegCDataToRegDDataOutputFile, "UPDATE");
   QCDVsMCClosurePlots(compRegCDataToRegDDataInputFiles, "muHadMass3Prong", theunit, 
+		      pair<string, string>("Region D data", "Region C data"), 1, 3, 0.0, 11.0, 
+		      compRegCDataToRegDDataOutputFile, "UPDATE");
+  QCDVsMCClosurePlots(compRegCDataToRegDDataInputFiles, "muHadMass3MuShareTrack", theunit, 
 		      pair<string, string>("Region D data", "Region C data"), 1, 3, 0.0, 11.0, 
 		      compRegCDataToRegDDataOutputFile, "UPDATE");
 
@@ -1211,6 +1219,9 @@ void formatDataBkgPlots(const string& inputVersion, const string& outputVersion,
 		      pair<string, string>("Region B data - MC", "Region C data"), 1, 3, 0.0, 
 		      11.0, compRegCDataToRegBDataMinusMCOutputFile, "UPDATE");
   QCDVsMCClosurePlots(compRegCDataToRegBDataMinusMCInputFiles, "muHadMass3Prong", theunit, 
+		      pair<string, string>("Region B data - MC", "Region C data"), 1, 3, 0.0, 
+		      11.0, compRegCDataToRegBDataMinusMCOutputFile, "UPDATE");
+  QCDVsMCClosurePlots(compRegCDataToRegBDataMinusMCInputFiles, "muHadMass3MuShareTrack", theunit, 
 		      pair<string, string>("Region B data - MC", "Region C data"), 1, 3, 0.0, 
 		      11.0, compRegCDataToRegBDataMinusMCOutputFile, "UPDATE");
 
